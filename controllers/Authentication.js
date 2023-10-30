@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 export const getUsers = async (req, res) => {
   try {
     const users = await Users.findAll({
-      attributes: ["id", "name", "email"],
+      attributes: ["id", "name", "email","password"],
     });
     res.json(users);
   } catch (error) {
@@ -74,7 +74,7 @@ export const Login = async (req, res) => {
 
     // Membuat access token menggunakan JSON Web Token (JWT)
     const accessToken = jwt.sign({ userId, name, email }, process.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: "20s",
+      expiresIn: "1d",
     });
 
     // Membuat refresh token menggunakan JSON Web Token (JWT)
@@ -168,4 +168,30 @@ export const Logout = async (req, res) => {
   );
   res.clearCookie("refresh_token");
   return res.sendStatus(200);
+};
+export const updateUsers = async (req, res) => {
+  try {
+    await Users.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json({ msg: "Users updated" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Internal server error" });
+  }
+};
+export const deleteUsers = async (req, res) => {
+  try {
+    await Users.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json({ msg: "Users deleted" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Internal server error" });
+  }
 };
