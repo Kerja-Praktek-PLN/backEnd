@@ -6,6 +6,11 @@ const { DataTypes } = Sequelize;
 const Users = db.define(
   "authentication",
   {
+    id_users: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     name: {
       type: DataTypes.STRING,
     },
