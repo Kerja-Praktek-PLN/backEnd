@@ -6,7 +6,15 @@ const { DataTypes } = Sequelize;
 const Data = db.define(
   "Master_Data",
   {
+    id_data: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     nomor_transmisi: {
+      type: DataTypes.INTEGER,
+    },
+    id_users: {
       type: DataTypes.INTEGER,
     },
     nama_GI: {
@@ -24,6 +32,7 @@ const Data = db.define(
   },
   {
     freezeTableName: true,
+    createdAt: false,
   }
 );
 
