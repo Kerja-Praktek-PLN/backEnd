@@ -1,4 +1,4 @@
-import { Sequelize, ValidationError } from "sequelize";
+import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
 
 const { DataTypes } = Sequelize;
@@ -7,7 +7,8 @@ const Row = db.define(
   "Monitoring_Row",
   {
     nomor_tower: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
+      unique: true,
     },
     tanggal: {
       type: DataTypes.STRING,
@@ -40,19 +41,5 @@ const Row = db.define(
     updatedAt: false,
   }
 );
-
-// Row.addHook("beforeValidate", (row, options) => {
-//   if (!["aman", "kritis"].includes(row.status_tegakan)) {
-//     throw new ValidationError('Status Tegakan harus "aman" atau "kritis"');
-//   }
-
-//   if (!["bawah", "luar"].includes(row.jalur)) {
-//     throw new ValidationError('Jalur harus "bawah" atau "luar"');
-//   }
-
-//   if (!["sudah pangkas", "sudah tebang"].includes(row.tindak_lanjut)) {
-//     throw new ValidationError('Status Tegakan harus "sudah pangkas" atau "sudah tebang"');
-//   }
-// });
 
 export default Row;
