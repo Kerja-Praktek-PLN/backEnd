@@ -1,5 +1,4 @@
 import Row from "../models/MonitoringRow.js";
-import { ValidationError } from "sequelize";
 
 export const getRow = async (req, res) => {
   try {
@@ -25,7 +24,7 @@ export const getRowById = async (req, res) => {
 
 export const createRow = async (req, res) => {
   try {
-    const { nomor_tower, tanggal, nama_PIC, jumlah_tegakan, status_tegakan, jenis_pohon, jalur, jarak_pohon_ke_konduktor, tindak_lanjut } = req.body;
+    const { nomor_tower, jumlah_tegakan, jarak_pohon_ke_konduktor } = req.body;
 
     if (isNaN(nomor_tower)) {
       return res.status(400).json({ msg: "nomor_tower must be a number" });
