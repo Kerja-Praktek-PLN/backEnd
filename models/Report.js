@@ -6,6 +6,11 @@ const { DataTypes } = Sequelize;
 const Report = db.define(
   "Report",
   {
+    id_report: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     nama_GI: {
       type: DataTypes.STRING,
     },
