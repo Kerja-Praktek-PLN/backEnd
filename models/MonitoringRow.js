@@ -6,6 +6,11 @@ const { DataTypes } = Sequelize;
 const Row = db.define(
   "Monitoring_Row",
   {
+    id_row: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     nomor_tower: {
       type: DataTypes.INTEGER,
       unique: true,
@@ -29,7 +34,7 @@ const Row = db.define(
       type: DataTypes.ENUM("bawah", "luar"),
     },
     jarak_pohon_ke_konduktor: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.DECIMAL(5, 2),
     },
     tindak_lanjut: {
       type: DataTypes.ENUM("sudah pangkas", "sudah tebang"),
