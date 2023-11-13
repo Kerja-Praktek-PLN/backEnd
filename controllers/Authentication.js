@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 export const getUsers = async (req, res) => {
   try {
     const users = await Users.findAll({
-      attributes: ["id", "name", "email","password"],
+      attributes: ["id", "name", "email", "password"],
     });
     res.json(users);
   } catch (error) {
@@ -169,6 +169,7 @@ export const Logout = async (req, res) => {
   res.clearCookie("refresh_token");
   return res.sendStatus(200);
 };
+
 export const updateUsers = async (req, res) => {
   try {
     await Users.update(req.body, {
@@ -182,6 +183,7 @@ export const updateUsers = async (req, res) => {
     res.status(500).json({ msg: "Internal server error" });
   }
 };
+
 export const deleteUsers = async (req, res) => {
   try {
     await Users.destroy({
