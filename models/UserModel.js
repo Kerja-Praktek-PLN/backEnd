@@ -6,7 +6,7 @@ const { DataTypes } = Sequelize;
 const Users = db.define(
   "authentication",
   {
-    id_users: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
