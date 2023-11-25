@@ -74,6 +74,6 @@ export const deleteRow = async (req, res) => {
     res.status(200).json({ msg: "Row deleted" });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ msg: "Internal server error" });
-  }
+    res.status(500).json({ msg: "Internal server error" });
+  }
 };

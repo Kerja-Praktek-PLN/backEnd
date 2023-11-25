@@ -6,6 +6,11 @@ const { DataTypes } = Sequelize;
 const Data = db.define(
   "Master_Data",
   {
+    id_data: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     nomor_transmisi: {
       type: DataTypes.INTEGER,
     },

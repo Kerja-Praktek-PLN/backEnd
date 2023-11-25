@@ -19,7 +19,8 @@ try {
   console.log(error);
 }
 
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+// app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+app.use(cors());
 app.use(cookieParser());
 app.use(express.static("public"));
 app.use(express.json());
