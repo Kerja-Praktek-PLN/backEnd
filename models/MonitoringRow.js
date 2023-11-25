@@ -6,11 +6,6 @@ const { DataTypes } = Sequelize;
 const Row = db.define(
   "Monitoring_Row",
   {
-    id_row: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
     nomor_tower: {
       type: DataTypes.INTEGER,
       unique: true,

@@ -1,4 +1,4 @@
-import Berita_Acara from "../models/BeritaAcara";
+import Berita_Acara from "../models/BeritaAcara.js";
 import path from "path";
 
 export const getBA = async (req, res) => {
@@ -23,19 +23,19 @@ export const getBAById = async (req, res) => {
 };
 
 export const createBA = async (req, res) => {
-  const file = req.files.file;
-  const fileSize = file.data.length;
-  const ext = path.extname(file.name);
-  const fileName = file.md5 + ext;
-  const url = `${req.protocol}://${req.get("host")}/images/${fileName}`;
+  // const file = req.files.file;
+  // const fileSize = file.data.length;
+  // const ext = path.extname(file.name);
+  // const fileName = file.md5 + ext;
+  // const url = `${req.protocol}://${req.get("host")}/images/${fileName}`;
   const allowedType = [".png", ".jpg", ".jpeg"];
 
-  if (!allowedType.includes(ext.toLowerCase())) return res.status(422).json({ msg: "Invalid images" });
-  if (fileSize > 5000000) return res.status(422).json({ msg: "Image must be less than 5 MB" });
+  // if (!allowedType.includes(ext.toLowerCase())) return res.status(422).json({ msg: "Invalid images" });
+  // if (fileSize > 5000000) return res.status(422).json({ msg: "Image must be less than 5 MB" });
 
   try {
-    const { nomor_tower, jumlah_tegakan, jarak_pohon_ke_konduktor } = req.body;
-
+    const { nomor_tower, jumlah_tegakan } = req.body;
+    console.log(req.files);
     if (isNaN(nomor_tower)) {
       return res.status(400).json({ msg: "nomor_tower must be a number" });
     }
@@ -47,19 +47,45 @@ export const createBA = async (req, res) => {
     if (isNaN(jumlah_tegakan)) {
       return res.status(400).json({ msg: "jumlah tegakan must be a number" });
     }
+    await Berita_Acara.create({
+      nama_PIC: req.body.nama_PIC,
+      id_users: req.body.id_users,
+      nomor_tower: req.body.nomor_tower,
+      jumlah_tegakan: req.body.jumlah_tegakan,
+      status_tegakan: req.body.status_tegakan,
+      jenis_pohon: req.body.jenis_pohon,
+      jalur: req.body.jalur,
+      tindak_lanjut: req.body.tindak_lanjut,
+      gambar_sebelum: "http://localhost:5000/BA/Images" + req.files.gambar_sebelum[0].filename,
+      gambar_setelah: "http://localhost:5000/BA/Images" + req.files.gambar_setelah[0].filename,
+    });
+    res.status(201).json({ msg: "Berita_Acara created" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Internal server error" });
+  }
+};
 
-    if (isNaN(jarak_pohon_ke_konduktor)) {
-      return res.status(400).json({ msg: "jarak pohon ke konduktor must be a number" });
-    }
+export const updateBA = async (req, res) => {
+  try {
+    await Berita_Acara.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Internal server error" });
+  }
+};
 
-    file.mv(`./public/images/${fileName}`),
-      async (err) => {
-        if (err) return res.status(500).json({ msg: err.message });
-        try {
-          await Berita_Acara.create({ gambar_sebelum: url });
-          res.status(201).json({ msg: "Berita_Acara created" });
-        } catch (error) {}
-      };
+export const deleteBA = async (req, res) => {
+  try {
+    await Berita_Acara.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "Internal server error" });

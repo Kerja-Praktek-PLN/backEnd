@@ -1,12 +1,12 @@
 import express from "express";
 import { getRow, getRowById, createRow, updateRow, deleteRow } from "../controllers/MonitoringRow.js";
 
-const router = express.Router();
+const rowRouter = express.Router();
 
-router.get("/row", getRow);
-router.get("/row/:id", getRowById);
-router.post("/row", createRow);
-router.patch("/row/:id", updateRow);
-router.delete("/row/:id", deleteRow);
+rowRouter.get("/row", getRow);
+rowRouter.get("/row/:id", getRowById);
+rowRouter.post("/row", createRow);
+rowRouter.patch("/row/:id", updateRow);
+rowRouter.delete("/row/:id", deleteRow);
 
-export default router;
+export default rowRouter;
