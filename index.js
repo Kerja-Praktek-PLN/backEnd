@@ -5,7 +5,10 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import db from "./config/Database.js";
 import authRoutes from "./routes/Authentication.js";
-import router from "./routes/MonitoringRow.js";
+import rowRouter from "./routes/MonitoringRow.js";
+import BArouter from "./routes/BeritaAcara.js";
+import multer from "multer";
+
 dotenv.config();
 const app = express();
 
@@ -18,10 +21,10 @@ try {
 
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(cookieParser());
-app.use(fileUpload());
 app.use(express.static("public"));
 app.use(express.json());
 app.use(authRoutes);
-app.use(router);
+app.use(rowRouter);
+app.use(BArouter);
 
 app.listen(5000, () => console.log("Server running at port 5000"));
