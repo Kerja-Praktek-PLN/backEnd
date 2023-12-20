@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 export const getUsers = async (req, res) => {
   try {
     const users = await Users.findAll({
-      attributes: ["id", "name", "email","password"],
+      attributes: ["id", "name", "email", "password"],
     });
     res.json(users);
   } catch (error) {
@@ -101,7 +101,6 @@ export const Login = async (req, res) => {
 
     // Mengirimkan respons dengan access token
     res.status(200).json({
-      error: false,
       message: "success",
       loginResult: {
         name: name,
