@@ -22,7 +22,20 @@ BArouter.post(
   createBA
 );
 BArouter.get("/BA/images/:id", getBAById);
-BArouter.patch("/BA/:id", updateBA);
+BArouter.put(
+  "/BA/:id",
+  upload.fields([
+    {
+      name: "gambar_sebelum",
+      maxCount: 1,
+    },
+    {
+      name: "gambar_setelah",
+      maxCount: 1,
+    },
+  ]),
+  updateBA
+);
 BArouter.delete("/BA/:id", deleteBA);
 
 export default BArouter;
