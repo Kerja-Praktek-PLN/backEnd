@@ -6,7 +6,7 @@ const rowRouter = express.Router();
 rowRouter.get("/row", getRow);
 rowRouter.get("/row/:id", getRowById);
 rowRouter.post("/row", createRow);
-rowRouter.patch("/row/:id", updateRow);
+rowRouter.put("/row/:id", updateRow);
 rowRouter.delete("/row/:id", deleteRow);
 
 export default rowRouter;
