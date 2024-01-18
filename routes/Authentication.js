@@ -8,7 +8,7 @@ const authRoutes = express.Router();
 authRoutes.get("/users", getUsers);
 authRoutes.post("/register", Register);
 authRoutes.post("/login", Login);
-authRoutes.patch("/edit/:id", updateUsers);
+authRoutes.put("/edit/:id", updateUsers);
 authRoutes.get("/token", refreshToken);
 authRoutes.post("/resetPassword", resetPassword);
 authRoutes.delete("/logout", Logout);
