@@ -6,13 +6,10 @@ const { DataTypes } = Sequelize;
 const Data = db.define(
   "Master_Data",
   {
-    id_data: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-    },
-    nomor_transmisi: {
-      type: DataTypes.INTEGER,
     },
     id_users: {
       type: DataTypes.INTEGER,
@@ -20,19 +17,20 @@ const Data = db.define(
     nama_GI: {
       type: DataTypes.STRING,
     },
-    nama_transmisi: {
+    name: {
       type: DataTypes.STRING,
     },
     link: {
       type: DataTypes.STRING,
     },
-    last_update: {
-      type: DataTypes.DATE,
+    category: {
+      type: DataTypes.ENUM("normal", "mw", "mvar"),
     },
   },
   {
     freezeTableName: true,
     createdAt: false,
+    updatedAt: true,
   }
 );
 
